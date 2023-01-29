@@ -38,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(child: Text("chaiyaphat.com"),color: Colors.red,),
+            Container(child: Text("chaiyaphat.com"),color: Colors.yellowAccent,),
             Text("chaiyaphat.com"),
             Text("chaiyaphat.com"),
           ],
