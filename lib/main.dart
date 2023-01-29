@@ -26,8 +26,23 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("Login"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Login Page"),
+      ),
+      body: Container(
+        color: Colors.teal.withOpacity(0.2),
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(child: Text("chaiyaphat.com"),color: Colors.red,),
+            Text("chaiyaphat.com"),
+            Text("chaiyaphat.com"),
+          ],
+        ),
+      ),
     );
   }
 }
