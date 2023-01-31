@@ -9,11 +9,14 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _usernameController.text = "admin";
+    _usernameController.text =
+        "admin"; // ใช้ _ จะเป็น private ไม่ใส่เป็น plublic
+    _passwordController.text = "1234";
   }
 
   @override
@@ -23,18 +26,62 @@ class _LoginPageState extends State<LoginPage> {
         title: const Text("Login Page"),
       ),
       body: Container(
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(32),
-            child: Column(
-              children: [
-                TextField(
-                  controller: _usernameController,
-                  decoration: InputDecoration(labelText: "Username"),
-                )
-              ],
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Card(
+            child: Container(
+              padding: const EdgeInsets.all(32),
+              height: 320,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    ..._buildTextField(),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    ..._buildButtons()
+                  ]),
             ),
-          )),
+          ),
+        ),
+      ),
     );
+  }
+
+  void _handleClickLogin() {
+    print(
+        "ArtDev: Login with ${_usernameController.text}, ${_passwordController.text}");
+  }
+
+  void _handleClickReset() {
+    _usernameController.text = "";
+    _passwordController.text = "";
+  }
+
+  _buildButtons() {
+    return [
+      ElevatedButton(
+        onPressed: _handleClickLogin,
+        child: Text("Login"),
+      ),
+      OutlinedButton(
+        onPressed: _handleClickReset,
+        child: const Text("Reset"),
+      )
+    ];
+  }
+
+  _buildTextField() {
+    return [
+      TextField(
+        controller: _usernameController,
+        decoration: const InputDecoration(labelText: "Username"),
+      ),
+      TextField(
+        controller: _passwordController,
+        decoration: const InputDecoration(labelText: "Password"),
+      )
+    ];
   }
 }
