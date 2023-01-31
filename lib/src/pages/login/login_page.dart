@@ -8,26 +8,33 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _usernameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _usernameController.text = "admin";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login Page"),
+        title: const Text("Login Page"),
       ),
       body: Container(
-        color: Colors.teal.withOpacity(0.2),
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(child: Text("chaiyaphat.com"),color: Colors.blueGrey,),
-            Container(child: Text("chaiyaphat.com"),color: Colors.yellowAccent,),
-            Text("chaiyaphat.com"),
-            Text("chaiyaphat.com"),
-          ],
-        ),
-      ),
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              children: [
+                TextField(
+                  controller: _usernameController,
+                  decoration: InputDecoration(labelText: "Username"),
+                )
+              ],
+            ),
+          )),
     );
   }
 }
