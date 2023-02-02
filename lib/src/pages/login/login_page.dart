@@ -15,8 +15,8 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
     _usernameController.text =
-        "admin"; // ใช้ _ จะเป็น private ไม่ใส่เป็น plublic
-    _passwordController.text = "1234";
+        "admin"; // ใช้ _ จะเป็น private ไม่ใส่เป็น public
+    _passwordController.text = "123456";
   }
 
   @override
@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void _handleClickLogin() {
     print(
-        "ArtDev: Login with ${_usernameController.text}, ${_passwordController.text}");
+        "ArtDev: Login with ${_usernameController.text}, ${_passwordController.text} ;");
   }
 
   void _handleClickReset() {
@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
     return [
       ElevatedButton(
         onPressed: _handleClickLogin,
-        child: Text("Login"),
+        child: const Text("Login"),
       ),
       OutlinedButton(
         onPressed: _handleClickReset,
