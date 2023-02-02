@@ -33,55 +33,56 @@ class _LoginPageState extends State<LoginPage> {
           },
         ),
       ),
-      body: Container(
-        width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Card(
-            child: Container(
-              padding: const EdgeInsets.all(32),
-              height: 420,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    ..._buildTextField(),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    BlocBuilder<LoginBloc, LoginState>(
-                      builder: (context, state) {
-                        return Text(
-                          "Login Result: ${state.isAuthen ? "Success" : "Error"}",
-                          style: TextStyle(
-                              color:
-                                  state.isAuthen ? Colors.green : Colors.red),
-                        );
-                      },
-                    ),
-                    ..._buildButtons(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () => _handleClickRemove(context),
-                          icon: const Icon(Icons.remove),
-                        ),
-                        BlocBuilder<LoginBloc, LoginState>(
-                          //จะ rerender เฉพาะ UI ตรงนี้
-                          // หุ้มไว้
-                          builder: (context, state) {
-                            // "Debug: ${context.read<LoginBloc>().state.count}");
-                            return Text("DebugX: ${state.count}");
-                          },
-                        ), //read state count
-                        IconButton(
-                          onPressed: () =>
-                              context.read<LoginBloc>().add(LoginEventAdd()),
-                          icon: const Icon(Icons.add),
-                        )
-                      ],
-                    )
-                  ]),
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: Card(
+              child: Container(
+                padding: const EdgeInsets.all(32),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ..._buildTextField(),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      BlocBuilder<LoginBloc, LoginState>(
+                        builder: (context, state) {
+                          return Text(
+                            "Login Result: ${state.isAuthen ? "Success" : "Error"}",
+                            style: TextStyle(
+                                color:
+                                    state.isAuthen ? Colors.green : Colors.red),
+                          );
+                        },
+                      ),
+                      ..._buildButtons(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () => _handleClickRemove(context),
+                            icon: const Icon(Icons.remove),
+                          ),
+                          BlocBuilder<LoginBloc, LoginState>(
+                            //จะ rerender เฉพาะ UI ตรงนี้
+                            // หุ้มไว้
+                            builder: (context, state) {
+                              // "Debug: ${context.read<LoginBloc>().state.count}");
+                              return Text("DebugX: ${state.count}");
+                            },
+                          ), //read state count
+                          IconButton(
+                            onPressed: () =>
+                                context.read<LoginBloc>().add(LoginEventAdd()),
+                            icon: const Icon(Icons.add),
+                          )
+                        ],
+                      )
+                    ]),
+              ),
             ),
           ),
         ),
