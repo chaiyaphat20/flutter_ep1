@@ -1,4 +1,5 @@
 import 'package:first_app/src/bloc/login/login_bloc.dart';
+import 'package:first_app/src/models/user.dart';
 import 'package:first_app/src/pages/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +27,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login Page"),
+        title: BlocBuilder<LoginBloc, LoginState>(
+          builder: (context, state) {
+            return Text("Login Page: ${state.count}");
+          },
+        ),
       ),
       body: Container(
         width: double.infinity,
@@ -42,6 +47,16 @@ class _LoginPageState extends State<LoginPage> {
                     ..._buildTextField(),
                     const SizedBox(
                       height: 32,
+                    ),
+                    BlocBuilder<LoginBloc, LoginState>(
+                      builder: (context, state) {
+                        return Text(
+                          "Login Result: ${state.isAuthen ? "Success" : "Error"}",
+                          style: TextStyle(
+                              color:
+                                  state.isAuthen ? Colors.green : Colors.red),
+                        );
+                      },
                     ),
                     ..._buildButtons(),
                     Row(
@@ -75,9 +90,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _handleClickLogin() {
-    print(
-        "ArtDev: Login with ${_usernameController.text}, ${_passwordController.text} ;");
-    Navigator.pushNamed(context, AppRoute.home);
+    // print(
+    //     "ArtDev: Login with ${_usernameController.text}, ${_passwordController.text} ;");
+    final user = User(
+        username: _usernameController.text, password: _passwordController.text);
+
+    final loginBloc = context.read<LoginBloc>();
+    loginBloc.add(LoginEventLogin(user));
+
+    // Navigator.pushNamed(context, AppRoute.home);
   }
 
   void _handleClickReset() {
