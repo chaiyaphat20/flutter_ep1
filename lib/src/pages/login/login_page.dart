@@ -13,7 +13,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  int count = 0;
 
   @override
   void initState() {
@@ -49,13 +48,20 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          onPressed: _handleClickRemove,
+                          onPressed: () => _handleClickRemove(context),
                           icon: const Icon(Icons.remove),
                         ),
-                        Text(
-                            "Debug: ${context.read<LoginBloc>().state.count}"), //read state count
+                        BlocBuilder<LoginBloc, LoginState>(
+                          //จะ rerender เฉพาะ UI ตรงนี้
+                          // หุ้มไว้
+                          builder: (context, state) {
+                            // "Debug: ${context.read<LoginBloc>().state.count}");
+                            return Text("DebugX: ${state.count}");
+                          },
+                        ), //read state count
                         IconButton(
-                          onPressed: _handleClickAdd,
+                          onPressed: () =>
+                              context.read<LoginBloc>().add(LoginEventAdd()),
                           icon: const Icon(Icons.add),
                         )
                       ],
@@ -83,15 +89,9 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.pushNamed(context, AppRoute.register);
   }
 
-  void _handleClickAdd() {
-    setState(() {
-      count++;
-    });
-  }
-
-  void _handleClickRemove() {
-    count--;
-    setState(() {});
+  void _handleClickRemove(BuildContext context) {
+    context.read<LoginBloc>().add(
+        LoginEventRemove()); //ข้อดี ถือ มันจะ render แค่ UI นั้นๆ ไม่ render ใหม่ เหมือน state
   }
 
   _buildButtons() {

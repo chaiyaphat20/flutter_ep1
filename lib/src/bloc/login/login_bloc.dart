@@ -7,7 +7,16 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(const LoginState()) {
-    //file login_start.dart
-    on<LoginEvent>((event, emit) {});
+    //Add
+    on<LoginEventAdd>((event, emit) {
+      // execute the something
+      emit(state.copyWith(count: state.count + 1));
+    });
+
+    //Remove
+    on<LoginEventRemove>((event, emit) {
+      // execute the something
+      emit(state.copyWith(count: state.count - 1));
+    });
   }
 }
