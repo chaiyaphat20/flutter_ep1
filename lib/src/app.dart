@@ -1,4 +1,6 @@
+import 'package:first_app/src/pages/home/home_page.dart';
 import 'package:first_app/src/pages/login/login_page.dart';
+import 'package:first_app/src/pages/routes.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -6,8 +8,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: "CMApp",
+      routes: AppRoute.all,
       home: LoginPage(),
     );
   }

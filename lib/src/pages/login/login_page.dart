@@ -1,3 +1,4 @@
+import 'package:first_app/src/pages/routes.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -32,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Card(
             child: Container(
               padding: const EdgeInsets.all(32),
-              height: 320,
+              height: 370,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -52,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
   void _handleClickLogin() {
     print(
         "ArtDev: Login with ${_usernameController.text}, ${_passwordController.text} ;");
+    Navigator.pushNamed(context, AppRoute.home);
   }
 
   void _handleClickReset() {
@@ -59,11 +61,19 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController.text = "";
   }
 
+  void _handleClickRegister() {
+    Navigator.pushNamed(context, AppRoute.register);
+  }
+
   _buildButtons() {
     return [
       ElevatedButton(
         onPressed: _handleClickLogin,
         child: const Text("Login"),
+      ),
+      OutlinedButton(
+        onPressed: _handleClickRegister,
+        child: const Text("Register"),
       ),
       OutlinedButton(
         onPressed: _handleClickReset,
