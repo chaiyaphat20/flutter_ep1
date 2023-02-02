@@ -11,6 +11,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  int count = 0;
 
   @override
   void initState() {
@@ -33,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Card(
             child: Container(
               padding: const EdgeInsets.all(32),
-              height: 370,
+              height: 420,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -41,7 +42,21 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 32,
                     ),
-                    ..._buildButtons()
+                    ..._buildButtons(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: _handleClickRemove,
+                          icon: const Icon(Icons.remove),
+                        ),
+                        Text("Debug: $count"),
+                        IconButton(
+                          onPressed: _handleClickAdd,
+                          icon: const Icon(Icons.add),
+                        )
+                      ],
+                    )
                   ]),
             ),
           ),
@@ -63,6 +78,17 @@ class _LoginPageState extends State<LoginPage> {
 
   void _handleClickRegister() {
     Navigator.pushNamed(context, AppRoute.register);
+  }
+
+  void _handleClickAdd() {
+    setState(() {
+      count++;
+    });
+  }
+
+  void _handleClickRemove() {
+    count--;
+    setState(() {});
   }
 
   _buildButtons() {
