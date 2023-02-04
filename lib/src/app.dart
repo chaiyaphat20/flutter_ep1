@@ -5,6 +5,8 @@ import 'package:first_app/src/pages/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+final navigatorState = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -18,6 +20,8 @@ class MyApp extends StatelessWidget {
           title: "CMApp",
           routes: AppRoute.all,
           home: const LoginPage(),
+          navigatorKey:
+              navigatorState, //ผูกค่า ประกาศ เป็น Global variable  เพื่อใช้งาน navigatorState.currentContext!
         ));
   }
 }
