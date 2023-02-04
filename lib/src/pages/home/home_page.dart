@@ -1,3 +1,4 @@
+import 'package:first_app/src/services/web_api.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,6 +9,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    WebApiServices().feed();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
