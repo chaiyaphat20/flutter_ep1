@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     _usernameController.text =
         "admin"; // ใช้ _ จะเป็น private ไม่ใส่เป็น public
-    _passwordController.text = "123456";
+    _passwordController.text = "1234";
   }
 
   @override
